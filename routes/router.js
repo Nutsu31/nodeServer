@@ -75,7 +75,23 @@ router.post("/login", async (req, res) => {
   }
 });
 
-router.get("/admin-panel", async (req, res) => {
+router.get("/admin-panel/general", async (req, res) => {
+  try {
+    const userList = await userModel.find({ isAdmin: true });
+    res.status(200).json({ status: 200, users: userList });
+  } catch (err) {
+    res.status(400).json({ status: 400, users: err });
+  }
+});
+router.get("/admin-panel/statistics", async (req, res) => {
+  try {
+    const userList = await userModel.find();
+    res.status(200).json({ status: 200, users: userList });
+  } catch (err) {
+    res.status(400).json({ status: 400, users: err });
+  }
+});
+router.get("/admin-panel/users", async (req, res) => {
   try {
     const userList = await userModel.find();
     res.status(200).json({ status: 200, users: userList });
